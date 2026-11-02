@@ -1,0 +1,11 @@
+Genre_Num,Genre_Name,Total_Samples,Errors,Error_Rate,Avg_Confidence,Genre
+8,romance,29,19,0.6551724137931034,0.78005326,8 (romance)
+10,travel,20,7,0.35,0.7731585,10 (travel)
+6,thriller,214,72,0.3364485981308411,0.7495367,6 (thriller)
+5,horror,123,37,0.3008130081300813,0.77018434,5 (horror)
+1,fantasy,184,52,0.2826086956521739,0.802568,1 (fantasy)
+3,crime,100,27,0.27,0.77116966,3 (crime)
+4,history,122,28,0.22950819672131148,0.82665175,4 (history)
+2,science,138,30,0.21739130434782608,0.7855716,2 (science)
+7,psychology,23,2,0.08695652173913043,0.8343963,7 (psychology)
+9,sports,27,0,0.0,0.94312096,9 (sports)
