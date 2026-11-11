@@ -26,8 +26,12 @@ Group 10's coursework for MSI5001: classifying book synopses into 10 genres (fan
 
 ## Open questions (ask the user)
 - `results/distilbert/error_rate_by_genre_tfidf_smote.png` is byte-identical to the Logistic Regression copy; it looks misfiled.
-- `results/logistic-regression/misclassified_samples.xlsx` and `misclassified_samples(1).xlsx` differ; which is final is unknown.
-- The README lists `[FINAL]_distilBERT_8epochs.ipynb` and `[FINAL] XGBOOST.ipynb`, but neither is in the repo.
+
+## Decisions made
+- The site is GitHub Pages from `main` / root, with `README.md` as the home page and `_config.yml` setting the theme. `CLAUDE.md` is excluded from the site.
+- On the site, link to repo files with absolute `https://github.com/RiniPi/MSI5001/blob/main/...` URLs, so they open on GitHub rather than downloading raw.
+- DistilBERT and XGBoost were built by teammates and are not the repo owner's work. Report their results, but their notebooks stay out of the repo.
+- `misclassified_samples(1).xlsx` was removed: it held the same 266 rows as `misclassified_samples.xlsx`.
 
 ## At the end of every session
 - If a change affects the README (new figure, moved file it names), update the README in the same PR.

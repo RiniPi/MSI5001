@@ -1,0 +1,8 @@
+# GitHub Pages settings. README.md is used as the home page.
+title: Book Genre Classification from Synopsis Text
+description: "MSI5001 Group 10 — TF-IDF + Logistic Regression vs DistilBERT on 4,657 book synopses"
+theme: jekyll-theme-cayman
+
+# Files kept in the repo but not published on the website
+exclude:
+  - CLAUDE.md

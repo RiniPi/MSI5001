@@ -3,6 +3,18 @@
 **MSI5001 — Introduction to AI: Concepts, Applications, and Evaluation · Group 10**
 Michael Merriot Sasmita · Rini Pinasthika · Tan Tit Ho · Teong Wei Kok
 
+[![Open the Logistic Regression notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RiniPi/MSI5001/blob/main/%5BFINAL%5D%20TF%2BIDF%2C%20LR%2C%20SMOTE.ipynb)
+· [View the code on GitHub](https://github.com/RiniPi/MSI5001)
+
+| Team member | Part of the project |
+|---|---|
+| Rini Pinasthika | TF-IDF + Logistic Regression model, insights and conclusions |
+| Teong Wei Kok | DistilBERT model, results |
+| Michael Merriot Sasmita | fastText + XGBoost model, dataset slides |
+| Tan Tit Ho | Report, introduction and methodology |
+
+> **About this repository:** it holds the Logistic Regression notebook and its outputs. The DistilBERT and XGBoost models were built by teammates; their results are reported below as the team recorded them, but their notebooks are not included here.
+
 > The brief: take a given dataset, build and train a model on it. Accuracy was not the main goal — the insight gained from the data and the process was. This README follows that spirit: it walks through the questions we asked, in the order we asked them.
 
 **Working constraints:** everything ran in Google Colab on free resources — CPU for the classical models, the free T4 GPU for DistilBERT. This shaped the model choices, feature limits and training budgets throughout.
@@ -154,22 +166,25 @@ Recommendations tied back to the two users: for browsing (Scenario B), allow mul
 | fastText + XGBoost | — | Weighted F1 ≈ 61%; 6.5 h training |
 | DistilBERT (8 epochs, T4) | Upsampling + class weights | Accuracy ≈ 72%, weighted F1 ≈ 74% |
 
+Logistic Regression results can be reproduced from the notebook in this repository. DistilBERT and XGBoost results are as reported by the teammates who ran them; their notebooks are not included here.
+
 ![F1 per genre — Logistic Regression vs DistilBERT](images/15_genre_f1_logreg_vs_distilbert.png)
 
 DistilBERT gains only a few points; romance is hardest for both; crime / thriller / horror form a confused cluster; Logistic Regression is cautious when wrong, DistilBERT overconfident.
 
 ## Repository contents
-| File | What it is |
+| File or folder | What it is |
 |---|---|
-| `[FINAL]_TF-IDF,_LR,_SMOTE.ipynb` | Logistic Regression notebook (Colab, CPU) |
-| `[FINAL]_distilBERT_8epochs.ipynb` | DistilBERT notebook (Colab, T4 GPU) |
-| `[FINAL] XGBOOST.ipynb` | fastText + XGBoost notebook (Colab, CPU) |
-| `misclassified_samples.csv` | 266 Logistic Regression test errors with top-3 probabilities |
-| `genre_coefficients.csv` | Logistic Regression word weights per genre |
-| `images/` | Charts used in this README |
+| [`[FINAL] TF+IDF, LR, SMOTE.ipynb`](https://github.com/RiniPi/MSI5001/blob/main/%5BFINAL%5D%20TF%2BIDF%2C%20LR%2C%20SMOTE.ipynb) | Logistic Regression notebook (Colab, CPU) |
+| [`misclassified_samples.csv`](https://github.com/RiniPi/MSI5001/blob/main/misclassified_samples.csv) | 266 Logistic Regression test errors with top-3 probabilities |
+| [`genre_coefficients.csv`](https://github.com/RiniPi/MSI5001/blob/main/genre_coefficients.csv) | Logistic Regression word weights per genre |
+| [`results/`](https://github.com/RiniPi/MSI5001/tree/main/results) | Charts, predictions and error analyses per model |
+| [`models/logistic-regression/`](https://github.com/RiniPi/MSI5001/tree/main/models/logistic-regression) | Saved model, TF-IDF vectoriser and label mapping |
+| [`docs/`](https://github.com/RiniPi/MSI5001/tree/main/docs) | Slides, progress report and data-anomaly log |
+| [`images/`](https://github.com/RiniPi/MSI5001/tree/main/images) | Charts used on this page |
 
 ## How to run
-1. Open the notebook in Google Colab and set the runtime (CPU for Logistic Regression and XGBoost, T4 GPU for DistilBERT).
+1. Open the Logistic Regression notebook in Google Colab (badge at the top) with a CPU runtime.
 2. Run Section 1 (setup).
-3. Run Section 2 and upload `data.csv` when prompted.
+3. Run Section 2 and upload `data.csv` when prompted. The dataset was provided by the course and is not included in this repository.
 4. Run the remaining sections in order.
