@@ -1,19 +1,18 @@
 # Book Genre Classification from Synopsis Text
 
-**MSI5001 — Introduction to AI: Concepts, Applications, and Evaluation · Group 10**
-Michael Merriot Sasmita · Rini Pinasthika · Tan Tit Ho · Teong Wei Kok
+**MSI5001 — Introduction to AI: Concepts, Applications, and Evaluation · NUS MSc AI & Innovation · Group 10 · Aug – Nov 2025**
 
 [![Open the Logistic Regression notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RiniPi/MSI5001/blob/main/%5BFINAL%5D%20TF%2BIDF%2C%20LR%2C%20SMOTE.ipynb)
 · [View the code on GitHub](https://github.com/RiniPi/MSI5001)
+· [Rini Pinasthika on LinkedIn](https://www.linkedin.com/in/rini-pinasthika)
 
-| Team member | Part of the project |
-|---|---|
-| Rini Pinasthika | TF-IDF + Logistic Regression model, insights and conclusions |
-| Teong Wei Kok | DistilBERT model, results |
-| Michael Merriot Sasmita | fastText + XGBoost model, dataset slides |
-| Tan Tit Ho | Report, introduction and methodology |
+## At a glance
 
-> **About this repository:** it holds the Logistic Regression notebook and its outputs. The DistilBERT and XGBoost models were built by teammates; their results are reported below as the team recorded them, but their notebooks are not included here.
+- **The default framing**: Every book has exactly one genre, so a classifier just needs a high score.
+- **What we found**: Many errors were books that genuinely belong to two genres, or genres that share vocabulary (crime, thriller, horror). Both models made the same kinds of mistakes, which points to the labels, not the model.
+- **Result**: A 4-second TF-IDF + Logistic Regression model reached 69.8% accuracy and 0.70 weighted F1; fine-tuned DistilBERT added only a few points. We proposed multi-label or hierarchical genres instead of a bigger model.
+- **My part** (Rini Pinasthika): Built the TF-IDF + Logistic Regression model end to end, reviewed its 280 misclassified test books, and wrote the insights and recommendations.
+- **Skills shown**: Problem Framing · Human-Centered Design · Error Analysis · Model Evaluation · Text Classification · NLP · Python (scikit-learn, NLTK)
 
 > The brief: take a given dataset, build and train a model on it. Accuracy was not the main goal — the insight gained from the data and the process was. This README follows that spirit: it walks through the questions we asked, in the order we asked them.
 
@@ -114,11 +113,22 @@ The log is also where the "versioning matters" lesson came from — without it, 
 ![5-fold cross-validation](images/07_cross_validation.png)
 
 ### 9. "Where and why does it go wrong?"
-A single score didn't tell us enough, so we looked at the failures: which genre gets mistaken for which, the error rate per genre, the 266 misclassified test samples with their top-3 genres and probabilities, and predictions grouped by confidence (confident and right, confident and wrong, near misses).
+A single score didn't tell us enough, so we looked at the failures: which genre gets mistaken for which, the error rate per genre, all 280 misclassified test books (out of 927) with their top-3 genres and probabilities, and predictions grouped by confidence (confident and right, confident and wrong, near misses).
 
 ![Confusion matrix — Logistic Regression](images/08_confusion_matrix_logreg.png)
 
 ![Per-genre precision, recall and F1 — Logistic Regression](images/09_per_class_metrics_logreg.png)
+
+The errors bunch into a few pairs. The most common: horror read as thriller (19), crime as thriller (18), thriller as crime (17), thriller as history (17) and thriller as horror (15). Four real examples from the Logistic Regression test set, shown as the model saw the text after cleaning:
+
+| Synopsis (start, after cleaning) | True | Predicted (top 3) | What it shows |
+|---|---|---|---|
+| "…lissa dragomir moroi princess mortal vampire rare gift harness earths magic…" | Fantasy | Romance 0.64 · Fantasy 0.20 · Horror 0.08 | A fantasy series built around a love story: both genres fit |
+| "war hero john puller know top investigator armys cid … brutally murder…" | Thriller | Crime 0.68 · Thriller 0.24 · Horror 0.02 | Crime and thriller share the same words (investigator, murder) |
+| "middle night house quiet street suburban minneapolis intruder silently murder…" | Horror | Thriller 0.42 · Crime 0.14 · Horror 0.14 | A near miss: three suspense genres close together |
+| "neuroscientist sleep expert matthew walker provide revolutionary exploration sleep…" | Science | Psychology 0.75 · Science 0.08 · Thriller 0.04 | Popular science about the mind sits between two labels |
+
+Full list: [`misclassified_samples_tfidf_smote.csv`](https://github.com/RiniPi/MSI5001/blob/main/results/logistic-regression/misclassified_samples_tfidf_smote.csv).
 
 Then we put both models side by side on the same kinds of examples — fantasy-romance hybrids, the crime / thriller / horror cluster, popular-science books about the mind. The reasoning: **if both models make the same mistake, the cause is in the data, not the model.**
 
@@ -126,7 +136,7 @@ Then we put both models side by side on the same kinds of examples — fantasy-r
 |---|---|
 | ![Error rate by genre — Logistic Regression](images/10_error_rate_logreg.png) | ![Error rate by genre — DistilBERT](images/11_error_rate_distilbert.png) |
 
-### 10. "Why did the model decide that — and can we trust it?"
+### 10. "Why did the model decide that — and can we trust it when it's unsure?"
 We extracted Logistic Regression's word weights to see which words drive each genre:
 
 ![Top words per genre](images/12_top_words_per_genre.png)
@@ -172,11 +182,22 @@ Logistic Regression results can be reproduced from the notebook in this reposito
 
 DistilBERT gains only a few points; romance is hardest for both; crime / thriller / horror form a confused cluster; Logistic Regression is cautious when wrong, DistilBERT overconfident.
 
+## Team
+
+| Team member | Part of the project |
+|---|---|
+| Rini Pinasthika | TF-IDF + Logistic Regression model, error analysis, insights and conclusions |
+| Teong Wei Kok | DistilBERT model, results |
+| Michael Merriot Sasmita | fastText + XGBoost model, dataset slides |
+| Tan Tit Ho | Report, introduction and methodology |
+
+This repository holds the Logistic Regression notebook and its outputs. The DistilBERT and XGBoost models were built by teammates; their results are reported as the team recorded them, but their notebooks are not included here.
+
 ## Repository contents
 | File or folder | What it is |
 |---|---|
 | [`[FINAL] TF+IDF, LR, SMOTE.ipynb`](https://github.com/RiniPi/MSI5001/blob/main/%5BFINAL%5D%20TF%2BIDF%2C%20LR%2C%20SMOTE.ipynb) | Logistic Regression notebook (Colab, CPU) |
-| [`misclassified_samples.csv`](https://github.com/RiniPi/MSI5001/blob/main/misclassified_samples.csv) | 266 Logistic Regression test errors with top-3 probabilities |
+| [`results/logistic-regression/misclassified_samples_tfidf_smote.csv`](https://github.com/RiniPi/MSI5001/blob/main/results/logistic-regression/misclassified_samples_tfidf_smote.csv) | The 280 Logistic Regression test errors from the final run, with confidence and top-3 genres |
 | [`genre_coefficients.csv`](https://github.com/RiniPi/MSI5001/blob/main/genre_coefficients.csv) | Logistic Regression word weights per genre |
 | [`results/`](https://github.com/RiniPi/MSI5001/tree/main/results) | Charts, predictions and error analyses per model |
 | [`models/logistic-regression/`](https://github.com/RiniPi/MSI5001/tree/main/models/logistic-regression) | Saved model, TF-IDF vectoriser and label mapping |
