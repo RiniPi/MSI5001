@@ -26,11 +26,14 @@ Group 10's coursework for MSI5001: classifying book synopses into 10 genres (fan
 
 ## Open questions (ask the user)
 - `results/distilbert/error_rate_by_genre_tfidf_smote.png` is byte-identical to the Logistic Regression copy; it looks misfiled.
+- Top-level `misclassified_samples.csv` and `results/logistic-regression/misclassified_samples.xlsx` hold 266 errors from an earlier run (932 test books). Ask whether to move them to an `earlier-run/` folder or delete them.
 
 ## Decisions made
 - The site is GitHub Pages from `main` / root, with `README.md` as the home page and `_config.yml` setting the theme. `CLAUDE.md` is excluded from the site.
 - On the site, link to repo files with absolute `https://github.com/RiniPi/MSI5001/blob/main/...` URLs, so they open on GitHub rather than downloading raw.
 - DistilBERT and XGBoost were built by teammates and are not the repo owner's work. Report their results, but their notebooks stay out of the repo.
+- The final Logistic Regression run is the one to quote everywhere: 927 test books, 280 errors, 69.8% accuracy (`results/logistic-regression/misclassified_samples_tfidf_smote.csv`, `full_predictions_results_tfidf_smote.csv`). The README's top block and the owner's LinkedIn and career docs use the same figures.
+- The README opens with an "At a glance" block for recruiters (default framing, finding, result, the owner's part, skills). Skill names match the owner's LinkedIn tags. Group decisions stay as "we"; only the "My part" row is first person.
 - `misclassified_samples(1).xlsx` was removed: it held the same 266 rows as `misclassified_samples.xlsx`.
 
 ## At the end of every session
